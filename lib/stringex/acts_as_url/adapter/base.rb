@@ -18,6 +18,7 @@ module Stringex
         end
 
         def ensure_unique_url!(instance)
+          puts "ENSURE unique url"
           @url_owners = nil
           self.instance = instance
 
