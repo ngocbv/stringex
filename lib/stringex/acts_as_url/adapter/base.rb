@@ -70,10 +70,15 @@ module Stringex
         end
 
         def create_callback
+          puts "CREATE callback"
           klass.send klass_callback_method, :ensure_unique_url, callback_options
         end
 
         def klass_callback_method
+          puts "settings.sync_url: #{settings.sync_url}"
+          puts "klass_sync_url_callback_method: #{klass_sync_url_callback_method}"
+          puts "klass_non_sync_url_callback_method: #{klass_non_sync_url_callback_method}"
+
           settings.sync_url ? klass_sync_url_callback_method : klass_non_sync_url_callback_method
         end
 
@@ -110,6 +115,7 @@ module Stringex
         # NOTE: The <tt>instance</tt> here is not the cached instance but a block variable
         # passed from <tt>klass_previous_instances</tt>, just to be clear
         def ensure_unique_url_for!(instance)
+          puts "ENSURE unique url for"
           instance.send :ensure_unique_url
           instance.save
         end
@@ -150,6 +156,8 @@ module Stringex
 
         def handle_url!
           self.base_url = instance.send(settings.url_attribute)
+          puts "1111self.base_url = instance.send(settings.url_attribute): #{self.base_url}"
+          puts "!settings.only_when_blank: #{!settings.only_when_blank}"
           modify_base_url if is_blank?(base_url) || !settings.only_when_blank
           write_url_attribute base_url
         end
@@ -182,6 +190,9 @@ module Stringex
 
         def modify_base_url
           root = instance.send(settings.attribute_to_urlify).to_s
+          puts "===========MODIFIED base url========="
+          puts "root: #{root}"
+          puts "root.to_url(configuration.string_extensions_settings): #{root.to_url(configuration.string_extensions_settings)}"
           self.base_url = root.to_url(configuration.string_extensions_settings)
         end
 
