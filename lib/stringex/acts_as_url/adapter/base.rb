@@ -192,6 +192,7 @@ module Stringex
         def modify_base_url
           root = instance.send(settings.attribute_to_urlify).to_s
           puts "===========MODIFIED base url========="
+          puts "configuration.string_extensions_settings: #{configuration.string_extensions_settings}"
           puts "root: #{root}"
           puts "root.to_url(configuration.string_extensions_settings): #{root.to_url(configuration.string_extensions_settings)}"
           self.base_url = root.to_url(configuration.string_extensions_settings)
