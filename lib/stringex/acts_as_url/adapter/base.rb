@@ -156,6 +156,7 @@ module Stringex
 
         def handle_url!
           self.base_url = instance.send(settings.url_attribute)
+          puts "settings.url_attribute: #{settings.url_attribute}"
           puts "1111self.base_url = instance.send(settings.url_attribute): #{self.base_url}"
           puts "!settings.only_when_blank: #{!settings.only_when_blank}"
           modify_base_url if is_blank?(base_url) || !settings.only_when_blank
